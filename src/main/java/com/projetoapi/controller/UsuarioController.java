@@ -1,9 +1,13 @@
 package com.projetoapi.controller;
 
+import com.projetoapi.dto.BaseResponseDto;
+import com.projetoapi.dto.UsuarioRequestDto;
 import com.projetoapi.model.Usuario;
 import com.projetoapi.repository.UsuarioRepository;
+import com.projetoapi.service.UsuarioService;
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,14 +18,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class UsuarioController {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private UsuarioService usuarioService;
 
     @PostMapping
-    public Usuario cadastrar (@RequestBody Usuario usuario) {
-        String senhaCriptografada = BCrypt.hashpw(usuario.getSenha(), BCrypt.gensalt());
-        usuario.setSenha(senhaCriptografada);
+    public ResponseEntity<BaseResponseDto> cadastrar (@RequestBody UsuarioRequestDto usuarioRequestDto) {
+        try {
+            return BaseController.feito(usuarioService.cadastrarUsuario(usuarioRequestDto));
 
-        return usuarioRepository.save(usuario);
+        } catch (RuntimeException e) {
+            return BaseController.erro(usuarioService.cadastrarUsuario(usuarioRequestDto));
+        }
+
     }
 
 
