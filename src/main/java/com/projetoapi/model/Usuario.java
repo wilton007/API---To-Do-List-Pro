@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jdk.jfr.DataAmount;
 
 @Entity
 public class Usuario {
@@ -18,6 +19,13 @@ public class Usuario {
 
     public Usuario() {
 
+    }
+
+    public Usuario(Long id, String nome, String email, String senha) {
+        this.id = id;
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
     }
 
     public Long getId() {
