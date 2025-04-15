@@ -1,5 +1,6 @@
 package com.projetoapi.service;
 
+import com.projetoapi.dto.UsuarioPatchRequestDto;
 import com.projetoapi.dto.UsuarioRequestDto;
 import com.projetoapi.dto.UsuarioResponseDto;
 import com.projetoapi.model.Usuario;
@@ -38,6 +39,20 @@ public class UsuarioService {
         usuarioResponseDto.setNome(usuario.getNome());
         usuarioResponseDto.setEmail(usuario.getEmail());
         return usuarioResponseDto;
+
+    }
+    public UsuarioResponseDto atualizandoUsuario(Long id, UsuarioPatchRequestDto usuarioPatchRequestDto) {
+        Usuario usuario = usuarioRepository.findById(id).orElseThrow(() -> new RuntimeException("Usuario não encontrado."));
+        if (usuarioPatchRequestDto.getNome() != null) {
+            usuario.setNome(usuarioPatchRequestDto.getNome());
+        }
+        if (usuarioPatchRequestDto.getEmail() != null) {
+            usuario.setEmail(usuarioPatchRequestDto.getEmail());
+        }
+        if (usuarioPatchRequestDto.getSenha() != null) {
+            usuario.setSenha(usuarioPatchRequestDto.getSenha());
+        }
+        return retornaUsuarioResponse(usuarioRepository.save(usuario));
 
     }
 

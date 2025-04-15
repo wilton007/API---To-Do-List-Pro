@@ -2,16 +2,16 @@ package com.projetoapi.dto;
 
 public class BaseResponseDto {
 
-    private Integer condigo;
+    private Integer codigo;
     private String mensagem;
     private Object dados;
 
     public Integer getCondigo() {
-        return condigo;
+        return codigo;
     }
 
     public void setCondigo(Integer condigo) {
-        this.condigo = condigo;
+        this.codigo = condigo;
     }
 
     public String getMensagem() {
