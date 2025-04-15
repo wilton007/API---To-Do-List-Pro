@@ -13,7 +13,7 @@ public class BaseController {
 
     static ResponseEntity<BaseResponseDto> feito(UsuarioResponseDto usuarioResponseDto) {
         BaseResponseDto baseResponseDto = new BaseResponseDto();
-        baseResponseDto.setCondigo(HttpStatus.CREATED.value());
+        baseResponseDto.setCondigo(HttpStatus.OK.value());
         baseResponseDto.setMensagem(SUCESSO);
         baseResponseDto.setDados(usuarioResponseDto);
 
